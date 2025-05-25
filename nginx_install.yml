@@ -1,10 +1,15 @@
-cat <<EOF > nginx_install.yml
 ---
 - name: Install Nginx on Linux
-  hosts: all
+  hosts: webservers
   become: true
+  tasks:
+    - name: Install Nginx
+      ansible.builtin.yum:
+        name: nginx
+        state: present
 
-  roles:
-    - nginx
-EOF
-
+    - name: Start and Enable Nginx
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: true
