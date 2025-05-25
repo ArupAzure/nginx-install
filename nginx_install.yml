@@ -1,0 +1,10 @@
+cat <<EOF > nginx_install.yml
+---
+- name: Install Nginx on Linux
+  hosts: all
+  become: true
+
+  roles:
+    - nginx
+EOF
+

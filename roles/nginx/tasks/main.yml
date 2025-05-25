@@ -1,0 +1,21 @@
+cat <<EOF > roles/nginx/tasks/main.yml
+---
+- name: Install Nginx on Debian/Ubuntu
+  apt:
+    name: nginx
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Install Nginx on RedHat/CentOS
+  yum:
+    name: nginx
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: Start and enable Nginx
+  service:
+    name: nginx
+    state: started
+    enabled: true
+EOF
+
